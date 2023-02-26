@@ -2,7 +2,7 @@ import java.util.List;
 
 public class Person {
 
-    public String clientName;
-    public int clientTicket;
+    protected String clientName;
+    protected int clientTicket;
 
 }

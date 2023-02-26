@@ -1,19 +1,19 @@
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
 public class Main {
-    public static Person person1 = new Person();
-    public static Person person2 = new Person();
-    public static List<String> client = new ArrayList<>();
-    public static List<Integer> ticket = new ArrayList<>();
-    public static Queue<String> qClients = new LinkedList<>();
-    public static Queue<Integer> qTickets = new LinkedList<>();
 
     public static void main(String[] args) {
-        generateClients();
-        generateTickets();
+        Person person1 = new Person();
+        Person person2 = new Person();
+        List<String> client = new ArrayList<>();
+        List<Integer> ticket = new ArrayList<>();
+        Queue<String> qClients = new LinkedList<>();
+        Queue<Integer> qTickets = new LinkedList<>();
+        generateClients(client, ticket);
         for (int i = 0; i < client.size(); i++) {
             qClients.offer(client.get(i));
             qTickets.offer(ticket.get(i));
@@ -35,22 +35,18 @@ public class Main {
         }
     }
 
-    public static List<String> generateClients() {
+    public static List<String> generateClients(List<String> client, List<Integer> ticket) {
         client.add("Misha Ivanov");
         client.add("Ivan Zhukov");
         client.add("Sveta Ozerova");
         client.add("Masha Kalinina");
         client.add("Ira Dubinina");
-        return client;
-    }
-
-    public static List<Integer> generateTickets() {
         ticket.add(2);
         ticket.add(4);
         ticket.add(3);
         ticket.add(6);
         ticket.add(1);
-        return ticket;
+        return client;
     }
 }
 
