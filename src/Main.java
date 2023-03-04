@@ -1,52 +1,30 @@
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 public class Main {
 
     public static void main(String[] args) {
-        Person person1 = new Person();
-        Person person2 = new Person();
-        List<String> client = new ArrayList<>();
-        List<Integer> ticket = new ArrayList<>();
-        Queue<String> qClients = new LinkedList<>();
-        Queue<Integer> qTickets = new LinkedList<>();
-        generateClients(client, ticket);
-        for (int i = 0; i < client.size(); i++) {
-            qClients.offer(client.get(i));
-            qTickets.offer(ticket.get(i));
-        }
-        while (!qClients.isEmpty()) {
-            person1.clientName = qClients.peek();
-            person2.clientTicket = qTickets.peek();
-            if (person2.clientTicket > 0) {
-                System.out.println(qClients.peek() + " прокатился на аттракционе");
-                person2.clientTicket = person2.clientTicket - 1;
-                qTickets.poll();
-                qTickets.offer(person2.clientTicket);
-                qClients.poll();
-                qClients.offer(person1.clientName);
+        Deque<Person> queue = new ArrayDeque<>();
+        generateClients(queue);
+        while (!queue.isEmpty()) {
+            Person person = queue.peek();
+            if (person.getClientTicket() > 0) {
+                System.out.println(person.getClientName() + " прокатился на аттракционе");
+                queue.poll();
+                queue.addLast(new Person(person.getClientName(), person.getClientTicket() - 1));
             } else {
-                qClients.poll();
-                qTickets.poll();
+                queue.poll();
             }
         }
     }
 
-    public static List<String> generateClients(List<String> client, List<Integer> ticket) {
-        client.add("Misha Ivanov");
-        client.add("Ivan Zhukov");
-        client.add("Sveta Ozerova");
-        client.add("Masha Kalinina");
-        client.add("Ira Dubinina");
-        ticket.add(2);
-        ticket.add(4);
-        ticket.add(3);
-        ticket.add(6);
-        ticket.add(1);
-        return client;
+    public static Deque<Person> generateClients(Deque<Person> queue) {
+        queue.add(new Person("Misha Ivanov", 2));
+        queue.add(new Person("Ivan Zhukov", 4));
+        queue.add(new Person("Sveta Ozerova", 3));
+        queue.add(new Person("Masha Kalinina", 6));
+        queue.add(new Person("Ira Dubinina", 1));
+        return queue;
     }
 }
 
